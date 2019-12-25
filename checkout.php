@@ -5,65 +5,11 @@ if (empty($_SESSION["keranjang"]) or !isset($_SESSION["keranjang"])) {
     echo "<script>alert('Keranjang Kosong, Silahkan Berbelanja Dahulu');</script>";
     echo "<script>window.location='index.php'</script>";
 }
+if (!isset($_SESSION["member"])) {
+    echo "<script>alert('Silahkan Login Terlebih Dahulu');</script>";
+    echo "<script>window.location='index.php?page=keranjang'</script>";
+}
 ?>
-<?php
-if (isset($_POST['checkout'])) {
-
-    $id_member            = $_SESSION['member']['id_pelanggan'];
-    $id_ongkir            = $_POST['ongkir'];
-    $tgl                  = date("Y-m-d");
-    $alamat_pengiriman    = $_POST['alamat_pengiriman'];
-    $ambil_data_ongkir    = $koneksi->query("SELECT * FROM ongkos_kirim WHERE id_ongkir = '$id_ongkir'");
-    $pecah_tarif          = $ambil_data_ongkir->fetch_assoc();
-    $tarif                = $pecah_tarif['tarif'];
-    $nama_kota            = $pecah_tarif['tujuan'];
-
-    $total_belanja        = $total + $tarif;
-
-    // Menyimpan data ke tb_pembelian
-    $koneksi->query("INSERT INTO  `penjualan`(  `id_pelanggan`, 
-                                                `id_ongkir`, 
-                                                `tgl_penjualan`, 
-                                                `total`, 
-                                                `kota`, 
-                                                `tarif`, 
-                                                `alamt`) 
-                                                VALUES (
-                                                '$id_member',
-                                                '$id_ongkir',
-                                                '$tgl',
-                                                '$total_belanja',
-                                                '$nama_kota',
-                                                '$tarif',
-                                                '$alamat_pengiriman')");
-
-
-    // mendapatkan id pembelian barusan
-    $id_pembelian_barusan = mysqli_insert_id($koneksi);
-
-    foreach ($_SESSION['keranjang'] as $id_produk => $jumlah) {
-
-
-        // Update stok
-        $ambil_produk = $koneksi->query("SELECT * FROM barang WHERE kd_barang=$id_produk");
-        while ($pecah_produk = $ambil_produk->fetch_assoc()) {
-            $update_stok = $pecah_produk['stok'] - $jumlah;
-            $koneksi->query("UPDATE `barang` SET `stok`='$update_stok' WHERE `kd_barang`='$id_produk'");
-        }
-
-        $koneksi->query("INSERT INTO `detail`(  `id_penjualan`, 
-                                                `kd_barang`, 
-                                                `jml_beli`) VALUES (
-                                                '$id_pembelian_barusan',
-                                                '$id_produk',
-                                                '$jumlah')");
-    }
-    //mengkosongkan keranjang belanja 
-    unset($_SESSION['keranjang']);
-    // tampilan di alihkan ke halaman nota
-    echo "<script>alert('Pembelian Sukses');</script>";
-    echo "<script>window.location='index.php?page=nota&id=$id_pembelian_barusan';</script>";
-} ?>
 <div class="row">
     <div class="span9">
         <div class="well well-small">
@@ -174,6 +120,64 @@ if (isset($_POST['checkout'])) {
                 <a href="index.php?page=keranjang" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Keranjang Belanja </a>
                 <button name="checkout" class="shopBtn btn-large pull-right">Checkout <span class="icon-arrow-right"></span></button>
             </form>
+            <?php
+            if (isset($_POST['checkout'])) {
+
+                $id_member            = $_SESSION['member']['id_pelanggan'];
+                $id_ongkir            = $_POST['ongkir'];
+                $tgl                  = date("Y-m-d");
+                $alamat_pengiriman    = $_POST['alamat_pengiriman'];
+                $ambil_data_ongkir    = $koneksi->query("SELECT * FROM ongkos_kirim WHERE id_ongkir = '$id_ongkir'");
+                $pecah_tarif          = $ambil_data_ongkir->fetch_assoc();
+                $tarif                = $pecah_tarif['tarif'];
+                $nama_kota            = $pecah_tarif['tujuan'];
+
+                $total_belanja        = $total + $tarif;
+
+                // Menyimpan data ke tb_pembelian
+                $koneksi->query("INSERT INTO  `penjualan`(  `id_pelanggan`, 
+                                                `id_ongkir`, 
+                                                `tgl_penjualan`, 
+                                                `total`, 
+                                                `kota`, 
+                                                `tarif`, 
+                                                `alamt`) 
+                                                VALUES (
+                                                '$id_member',
+                                                '$id_ongkir',
+                                                '$tgl',
+                                                '$total_belanja',
+                                                '$nama_kota',
+                                                '$tarif',
+                                                '$alamat_pengiriman')");
+
+
+                // mendapatkan id pembelian barusan
+                $id_pembelian_barusan = mysqli_insert_id($koneksi);
+
+                foreach ($_SESSION['keranjang'] as $id_produk => $jumlah) {
+
+
+                    // Update stok
+                    $ambil_produk = $koneksi->query("SELECT * FROM barang WHERE kd_barang=$id_produk");
+                    while ($pecah_produk = $ambil_produk->fetch_assoc()) {
+                        $update_stok = $pecah_produk['stok'] - $jumlah;
+                        $koneksi->query("UPDATE `barang` SET `stok`='$update_stok' WHERE `kd_barang`='$id_produk'");
+                    }
+
+                    $koneksi->query("INSERT INTO `detail`(  `id_penjualan`, 
+                                                `kd_barang`, 
+                                                `jml_beli`) VALUES (
+                                                '$id_pembelian_barusan',
+                                                '$id_produk',
+                                                '$jumlah')");
+                }
+                //mengkosongkan keranjang belanja 
+                unset($_SESSION['keranjang']);
+                // tampilan di alihkan ke halaman nota
+                echo "<script>alert('Pembelian Sukses');</script>";
+                echo "<script>window.location='index.php?page=nota&id=$id_pembelian_barusan';</script>";
+            } ?>
         </div>
     </div>
 </div>

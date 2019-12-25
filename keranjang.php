@@ -49,7 +49,7 @@ if (empty($_SESSION["keranjang"]) or !isset($_SESSION["keranjang"])) {
             </table><br />
 
             <a href="index.php" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Lanjut Belanja </a>
-            <a href="login.html" class="shopBtn btn-large pull-right">Next <span class="icon-arrow-right"></span></a>
+            <a href="index.php?page=checkout" class="shopBtn btn-large pull-right">Next <span class="icon-arrow-right"></span></a>
 
         </div>
     </div>

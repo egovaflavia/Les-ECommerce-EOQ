@@ -33,18 +33,20 @@ if (empty($_SESSION['member'])) {
                     <tr>
                         <td><?php echo $no++ ?></td>
                         <td><?php echo $pecah['tgl_penjualan'] ?></td>
-                        <td><?php echo $pecah['status'] ?></td>
+                        <td>
+                            <?php if ($pecah['status'] == "Pending") { ?>
+                                <span class="label label-warning"><?php echo $pecah['status'] ?></span>
+                            <?php } ?>
+
+                        </td>
                         <td>Rp. <?php echo number_format($pecah['total']) ?></td>
                         <td>
                             <a target="_blank" href="cetak.php?idpemesanan=<?php echo $pecah['id_penjualan'] ?>" class="btn btn-success"> <span class="fa fa-print"></span> Cetak</a>
-                            <a target="_blank" href="cetak.php?idpemesanan=<?php echo $pecah['id_penjualan'] ?>" class="btn btn-primary"> <span class="fa fa-print"></span> Pembayaran</a>
+                            <a href="index.php?page=pembayaran&id=<?php echo $pecah['id_penjualan'] ?>" class="btn btn-primary"> <span class="fa fa-print"></span> Pembayaran</a>
                         </td>
                     </tr>
                 <?php } ?>
             </tbody>
         </table>
-
-
-
     </div>
 </div>

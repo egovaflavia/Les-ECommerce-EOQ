@@ -111,12 +111,23 @@ $pelanggan = $get->fetch_object();
                     </tr>
                 </tfoot>
             </table>
-            <h4>Total Yang Akan Di Bayarkan Adalah Rp. <?php echo number_format($total + $pelanggan->tarif) ?></h4>
-            <br />
 
-            <a href="index.php" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Lanjut Belanja </a>
-            <a href="login.html" class="shopBtn btn-large pull-right">Next <span class="icon-arrow-right"></span></a>
 
+            <div class="span5">
+                <div class="alert alert-info">
+                    Total Yang Akan Di Bayarkan Adalah Rp.
+                    <strong><?php echo number_format($total + $pelanggan->tarif) ?></strong> <br>
+                    Silahkan Transfer ke salah satu rekening :
+                    <ul>
+                        <li>BRI : 5521293019203</li>
+                        <li>Mandiri : 2231234</li>
+                        <li>BCA : 13212341</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clr"></div>
+
+            <a href="index.php?page=riwayat" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Riwayat Belanja </a>
         </div>
     </div>
 </div>
