@@ -26,7 +26,7 @@ $pecah = $ambil->fetch_assoc();
                     <div class="control-group">
                         <label class="control-label"><span>Rp. <?php echo $pecah['harga'] ?></span></label>
                         <div class="controls">
-                            <input name="jumlah" type="number" min="1" class="span6" placeholder="Qty.">
+                            <input name="jumlah" type="number" min="1" max="<?php echo $pecah['stok']; ?>" class="span6" placeholder="Qty.">
                         </div>
                     </div>
 

@@ -17,7 +17,7 @@ if (empty($_SESSION['member'])) {
                 <tr>
                     <th width="20px">No</th>
                     <th width="75px">Tanggal</th>
-                    <th>Status</th>
+                    <th width="120px">Status</th>
                     <th>Total</th>
                     <th width="172px">Opsi</th>
                 </tr>
@@ -36,6 +36,8 @@ if (empty($_SESSION['member'])) {
                         <td>
                             <?php if ($pecah['status'] == "Pending") { ?>
                                 <span class="label label-warning"><?php echo $pecah['status'] ?></span>
+                            <?php } else { ?>
+                                <span class="label label-success"><?php echo $pecah['status'] ?></span>
                             <?php } ?>
 
                         </td>

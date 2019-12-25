@@ -14,6 +14,8 @@ if ($idBeli !== $idLogin) {
     echo "<script>alert('Jangan Nakal');location='index.php?page=riwayat'</script>";
 }
 ?>
+
+
 <div class="row">
     <div class="span9">
         <div class="well well-small">
@@ -38,25 +40,25 @@ if ($idBeli !== $idLogin) {
                 <div class="control-group ">
                     <label class="control-label">Nama Penyetor</label>
                     <div class="controls">
-                        <input required type="text">
+                        <input name="nama" required type="text">
                     </div>
                 </div>
                 <div class="control-group ">
                     <label class="control-label">BANK</label>
                     <div class="controls">
-                        <input required type="text">
+                        <input name="bank" required type="text">
                     </div>
                 </div>
                 <div class="control-group ">
                     <label class="control-label">Jumlah</label>
                     <div class="controls">
-                        <input required type="number" min="1">
+                        <input name="jumlah" required type="number" min="1">
                     </div>
                 </div>
                 <div class="control-group ">
                     <label class="control-label">Foto Bukti</label>
                     <div class="controls">
-                        <input required type="file">
+                        <input name="bukti" required type="file">
                         <span class="label label-important">Foto Max: 2MB</span>
                     </div>
 
@@ -68,22 +70,37 @@ if ($idBeli !== $idLogin) {
                 </div>
             </form>
             <hr>
-
             <?php
-            // proteksi keamanan
-            // mendapatkan id yg login
-            $idLogin = $_SESSION['member']['id_pelanggan'];
+            if (isset($_POST['konfirmasi'])) {
+                $namabukti = $_FILES['bukti']['name'];
+                $lokasi = $_FILES['bukti']['tmp_name'];
+                // proteksi nama foto yang sama
+                $namafix = date("Ydmhis") . $namabukti;
+                move_uploaded_file($lokasi, "admin/assets/images/bukti_bayar/$namafix");
+                $nama = $_POST['nama'];
+                $bank = $_POST['bank'];
+                $jumlah = $_POST['jumlah'];
+                $tanggal = date("Y-m-d");
 
-            // mendpatkan id orang yg beli
-            $idOrangYgBeli = $pelanggan->id_pelanggan;
+                $koneksi->query("INSERT INTO `pembayaran`(  `id_penjualan`, 
+                                                            `nama`, 
+                                                            `bank`, 
+                                                            `jumlah`, 
+                                                            `tanggal`, 
+                                                            `bukti`) VALUES 
+                                                            ('$id',
+                                                            '$nama',
+                                                            '$bank',
+                                                            '$jumlah',
+                                                            '$tanggal',
+                                                            '$namafix'
+                                                            )");
 
-            if ($idLogin !== $idOrangYgBeli) {
-                echo "
-                <script>alert('Jangan Nakal');location='index.php?page=riwayat'</script>
-                ";
+                $koneksi->query("UPDATE penjualan SET status = 'Sudah Di Bayar' WHERE id_penjualan = '$id'");
+
+                echo "<script>alert('Terimakasih, telah melakukan pembayaran');location='index.php?page=riwayat'</script>";
             }
             ?>
-
             <a href="index.php" class="shopBtn btn-large"><span class="icon-arrow-left"></span> Lanjut Belanja </a>
         </div>
     </div>

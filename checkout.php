@@ -159,11 +159,13 @@ if (!isset($_SESSION["member"])) {
 
 
                     // Update stok
-                    $ambil_produk = $koneksi->query("SELECT * FROM barang WHERE kd_barang=$id_produk");
-                    while ($pecah_produk = $ambil_produk->fetch_assoc()) {
-                        $update_stok = $pecah_produk['stok'] - $jumlah;
-                        $koneksi->query("UPDATE `barang` SET `stok`='$update_stok' WHERE `kd_barang`='$id_produk'");
-                    }
+                    // $ambil_produk = $koneksi->query("SELECT * FROM barang WHERE kd_barang=$id_produk");
+                    // while ($pecah_produk = $ambil_produk->fetch_assoc()) {
+                    //     $update_stok = $pecah_produk['stok'] - $jumlah;
+                    //     $koneksi->query("UPDATE `barang` SET `stok`='$update_stok' WHERE `kd_barang`='$id_produk'");
+                    // }
+
+                    $koneksi->query("UPDATE barang SET stok = stok - $jumlah WHERE kd_barang = $id_produk");
 
                     $koneksi->query("INSERT INTO `detail`(  `id_penjualan`, 
                                                 `kd_barang`, 
