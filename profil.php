@@ -16,22 +16,22 @@
         <h2>Rekening Pembayaran</h2>
 
         <form id="pembayaran" class="bs-docs-example form-horizontal">
-            <div class="control-group warning">
-                <label class="control-label" for="inputWarning">BRI</label>
+            <div class="control-group success">
+                <label class="control-label" for="inputsuccess">BRI</label>
                 <div class="controls">
-                    <input disabled type="text" id="inputWarning">
+                    <input value="5521293019203" disabled type="text" id="inputsuccess">
                 </div>
             </div>
-            <div class="control-group warning">
-                <label class="control-label" for="inputWarning">Mandiri</label>
+            <div class="control-group success">
+                <label class="control-label" for="inputsuccess">Mandiri</label>
                 <div class="controls">
-                    <input disabled type="text" id="inputWarning">
+                    <input value="2231234" disabled type="text" id="inputsuccess">
                 </div>
             </div>
-            <div class="control-group warning">
-                <label class="control-label" for="inputWarning">BCA</label>
+            <div class="control-group success">
+                <label class="control-label" for="inputsuccess">BCA</label>
                 <div class="controls">
-                    <input disabled type="text" id="inputWarning">
+                    <input value="13212341" disabled type="text" id="inputsuccess">
                 </div>
             </div>
         </form>

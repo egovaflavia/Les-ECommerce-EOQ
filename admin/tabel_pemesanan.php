@@ -20,8 +20,9 @@
                 <th width="15px">No</th>
                 <th>Nama Pelanggan</th>
                 <th>Tanggal Pemesanan</th>
-                <th>total</th>
-                <th width="70px">Aksi</th>
+                <th>Status</th>
+                <th>Total</th>
+                <th width="190px">Aksi</th>
 
               </tr>
             </thead>
@@ -30,13 +31,16 @@
               $no = 1;
               $get = $koneksi->query("SELECT * FROM penjualan LEFT JOIN pelanggan ON penjualan.id_pelanggan=pelanggan.id_pelanggan");
               while ($row = $get->fetch_object()) {
-                ?>
+              ?>
                 <tr>
                   <td><?php echo $no++ ?></td>
                   <td><?php echo $row->username ?></td>
                   <td><?php echo $row->tgl_penjualan ?></td>
+                  <td><?php echo $row->status ?></td>
                   <td><?php echo $row->total ?></td>
-                  <td><a href="index.php?page=aksi_pemesanan/detail&idpemesanan=<?php echo $row->id_penjualan ?>" class="btn btn-success">Detail</a></td>
+                  <td><a href="index.php?page=aksi_pemesanan/detail&idpemesanan=<?php echo $row->id_penjualan ?>" class="btn btn-success">Detail</a>
+                    <a href="index.php?page=tabel_pembayaran&idpembayaran=<?php echo $row->id_penjualan ?>" class="btn btn-primary">Pembayaran</a>
+                  </td>
 
                 </tr>
               <?php } ?>
