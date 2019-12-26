@@ -5,29 +5,25 @@
                 <div class="item">
                     <img style="width:700px;height:300px" src="assets/img/long.jpeg" alt="bootstrap ecommerce templates">
                     <div class="carousel-caption">
-                        <h4>Bootstrap shopping cart</h4>
-                        <p><span>Very clean simple to use</span></p>
+                        <h4>Plaza Yulia Furniture</h4>
                     </div>
                 </div>
                 <div class="item">
                     <img style="width:700px;height:300px" src="assets/img/long2.jpg" alt="bootstrap ecommerce templates">
                     <div class="carousel-caption">
-                        <h4>Bootstrap Ecommerce template</h4>
-                        <p><span>Highly Google seo friendly</span></p>
+                        <h4>Murah</h4>
                     </div>
                 </div>
                 <div class="item active">
                     <img style="width:700px;height:300px" src="assets/img/long3.jpg" alt="bootstrap ecommerce templates">
                     <div class="carousel-caption">
-                        <h4>Twitter Bootstrap cart</h4>
-                        <p><span>Very easy to integrate and expand.</span></p>
+                        <h4>Aman</h4>
                     </div>
                 </div>
                 <div class="item">
                     <img style="width:700px;height:300px" src="assets/img/long4.jpg" alt="bootstrap ecommerce templates">
                     <div class="carousel-caption">
-                        <h4>Bootstrap templates integration</h4>
-                        <p><span>Compitable to many more opensource cart</span></p>
+                        <h4>Terpercaya</h4>
                     </div>
                 </div>
             </div>
@@ -42,7 +38,7 @@
             <ul class="thumbnails">
 
                 <?php
-                $ambil = $koneksi->query("SELECT * FROM barang ORDER BY kd_barang DESC ");
+                $ambil = $koneksi->query("SELECT * FROM barang ORDER BY kd_barang DESC LIMIT 3 ");
                 while ($pecah = $ambil->fetch_assoc()) {
                 ?>
                     <li class="span4">
@@ -50,7 +46,7 @@
                             <a href="index.php?page=detail&idbarang=<?php echo $pecah['kd_barang'] ?>" class="overlay"></a>
                             <a class="zoomTool" href="index.php?page=detail&idbarang=<?php echo $pecah['kd_barang'] ?>" title="Detail"><span class="icon-search"></span> Detail</a>
                             <a href="index.php?page=detail&idbarang=<?php echo $pecah['kd_barang'] ?>">
-                                <img style="height: 230px" src="admin/assets/images/<?php echo $pecah['gambar'] ?>" alt="">
+                                <img style="width:100%; height: 230px" src="admin/assets/images/<?php echo $pecah['gambar'] ?>" alt="">
                             </a>
                             <div class="caption cntr">
                                 <p><?php echo $pecah['nm_barang'] ?></p>
