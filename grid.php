@@ -1,6 +1,7 @@
 <?php
 $idkategori = $_GET['idkategori'];
 ?>
+
 <div class="span9">
     <div class="well well-small">
         <h3>
