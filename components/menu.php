@@ -26,6 +26,7 @@ if (isset($_POST['login'])) {
             <div class="nav-collapse">
                 <ul class="nav">
                     <li class=""><a href="index.php">Home </a></li>
+                    <li class=""><a href="index.php?page=barang">Barang </a></li>
                     <li class=""><a href="index.php?page=profil">Profil </a></li>
                     <li class=""><a href="index.php?page=profil#pembayaran">Rekening Pembayaran </a></li>
                     <li class=""><a href="index.php?page=profil#lokasi">Lokasi </a></li>

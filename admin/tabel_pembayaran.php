@@ -43,7 +43,7 @@
             <div class="form-group">
               <label>Status</label>
               <select name="status" class="form-control">
-                <option value="Peding">Pending</option>
+                <option value="Pending">Pending</option>
                 <option value="Lunas">Lunas</option>
                 <option value="Pesanan Di Kirim">Pesanan Di Kirim</option>
                 <option value="Batal">Batal</option>

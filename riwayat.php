@@ -44,7 +44,11 @@ if (empty($_SESSION['member'])) {
                         <td>Rp. <?php echo number_format($pecah['total']) ?></td>
                         <td>
                             <a target="_blank" href="cetak.php?idpemesanan=<?php echo $pecah['id_penjualan'] ?>" class="btn btn-success"> <span class="fa fa-print"></span> Cetak</a>
-                            <a href="index.php?page=pembayaran&id=<?php echo $pecah['id_penjualan'] ?>" class="btn btn-primary"> <span class="fa fa-print"></span> Pembayaran</a>
+                            <?php
+                            if ($pecah['status'] == "Pending") {
+                            ?>
+                                <a href="index.php?page=pembayaran&id=<?php echo $pecah['id_penjualan'] ?>" class="btn btn-primary"> <span class="fa fa-print"></span> Pembayaran</a>
+                            <?php } ?>
                         </td>
                     </tr>
                 <?php } ?>
