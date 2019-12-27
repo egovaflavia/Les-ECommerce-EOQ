@@ -32,10 +32,11 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i> Laporan <b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a href="index.php?page=laporan_barang"><i class="fa fa-wrench"></i> Laporan Barang</a></li>
-          <li><a href="index.php?page=laporan_penjualan_bulanan"><i class="fa fa-bar-chart-o"></i> Laporan Penjualan Bulanan </a></li>
-          <li><a href="index.php?page=laporan_penjualan_tahunan"><i class="fa fa-bar-chart-o"></i> Laporan Penjualan Tahunan </a></li>
+          <li><a href="index.php?page=tabel_penjualan"><i class="fa fa-bar-chart-o"></i> Laporan Penjualan</a></li>
           <li><a href="index.php?page=laporan_eoq"><i class="fa fa-bar-chart-o"></i> Laporan Eoq</a></li>
-          <li><a href="index.php?page=laporan_penjualan_harian"><i class="fa fa-bar-chart-o"></i> Laporan Penjualan Harian </a></li>
+          <!-- <li><a href="index.php?page=laporan_penjualan_bulanan"><i class="fa fa-bar-chart-o"></i> Laporan Penjualan Bulanan </a></li>
+          <li><a href="index.php?page=laporan_penjualan_tahunan"><i class="fa fa-bar-chart-o"></i> Laporan Penjualan Tahunan </a></li> -->
+          <!-- <li><a href="index.php?page=laporan_penjualan_harian"><i class="fa fa-bar-chart-o"></i> Laporan Penjualan Harian </a></li> -->
         </ul>
       </li>
     </ul>
