@@ -11,7 +11,8 @@
     </div><!-- /.row -->
 
     <?php
-    $tahun = date("Y");
+    $tahun = $_POST['tahun'];
+    // $tahun = date("Y");
 
     if (isset($_GET['tahun']) && !empty($_GET['tahun'])) {
         $tahun = $_GET['tahun'];
@@ -49,7 +50,7 @@
                         <?php
                         $no = 1;
                         $data_penjualan_tahuan = mysqli_query($koneksi, "select 
-                        MONTH(waktu.tanggal) AS bulan,
+                        MONTHNAME(waktu.tanggal) AS bulan,
                         IFNULL(p.total, 0) AS total  
                         from tb_waktu waktu 
                         LEFT JOIN (SELECT 
@@ -64,7 +65,7 @@
                             <tr>
                                 <td><?php echo $no; ?></td>
                                 <td><?php echo $penjualan_tahunan['bulan']; ?></td>
-                                <td><?php echo $penjualan_tahunan['total']; ?></td>
+                                <td>Rp. <?php echo number_format($penjualan_tahunan['total']); ?></td>
 
                             </tr>
                         <?php

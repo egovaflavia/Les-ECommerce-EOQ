@@ -46,15 +46,21 @@
 
                 <div class="form-group">
                     <label>kebutuhan (R)</label>
-                    <input name="tahunan" class="form-control">
+                    <input onkeyup="eoq()" id="kebutuhan" name="tahunan" class="form-control">
                 </div>
+
+                <div class="form-group">
+                    <label>Eoq</label>
+                    <input readonly id="hasil" name="hasil" class="form-control">
+                </div>
+
                 <button name="simpan" type="submit" class="btn btn-success">Simpan</button>
                 <button type="reset" class="btn btn-warning">Reset</button>
             </form>
             <?php
             if (isset($_POST['simpan'])) {
                 $kd_barang = $_POST['kd_barang'];
-                
+
                 $tahunan = $_POST['tahunan'];
 
                 $simpan = $koneksi->query("INSERT INTO eoq (`kd_barang`,
@@ -62,35 +68,48 @@
                                                                 '$kd_barang',
                                                                 '$tahunan')");
 
-                if($simpan) {
+                if ($simpan) {
                     echo "<script>
                     alert('Data berhasil di simpan');
                     location='index.php?page=tabel_eoq';
                     </script>";
-                                    } else {
-                                        echo "<script>
+                } else {
+                    echo "<script>
                     alert('Data gagal di simpan');
                     location='index.php?page=tabel_eoq';
                     </script>";
-                                                                            }
-                                                                        }
+                }
+            }
             ?>
         </div>
     </div>
 </div>
+
 <script>
-function tampil() {
-    var barang_terpilih = document.getElementById("barang").selectedIndex;
-    var data_barang = <?php echo json_encode($data_barang); ?>;
-    var data_terpilih = data_barang[barang_terpilih];
+    function tampil() {
+        var barang_terpilih = document.getElementById("barang").selectedIndex;
+        var data_barang = <?php echo json_encode($data_barang); ?>;
+        var data_terpilih = data_barang[barang_terpilih];
 
-    document.getElementById("biaya_pesan").value = data_terpilih.biaya_pesan;
-    document.getElementById("biaya_simpan").value = data_terpilih.biaya_simpan;
-    document.getElementById("harga").value = data_terpilih.harga;
-    
-}
+        document.getElementById("biaya_pesan").value = data_terpilih.biaya_pesan;
+        document.getElementById("biaya_simpan").value = data_terpilih.biaya_simpan;
+        document.getElementById("harga").value = data_terpilih.harga;
 
-document.getElementById("barang").addEventListener("change", tampil);
+    }
 
-tampil()
+    document.getElementById("barang").addEventListener("change", tampil);
+
+    tampil()
+
+    function eoq() {
+
+        var c = document.getElementById("biaya_pesan").value
+        var i = document.getElementById("biaya_simpan").value
+        var P = document.getElementById("harga").value
+        var R = document.getElementById("kebutuhan").value
+
+        var eoq = (2 * parseFloat(c) * parseFloat(R)) / (parseFloat(P) * parseFloat(i))
+
+        document.getElementById('hasil').value = eoq
+    }
 </script>

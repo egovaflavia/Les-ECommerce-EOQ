@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 26 Des 2019 pada 09.23
+-- Generation Time: 02 Jan 2020 pada 19.57
 -- Versi Server: 5.6.37
 -- PHP Version: 5.6.31
 
@@ -136,14 +136,14 @@ CREATE TABLE IF NOT EXISTS `eoq` (
   `id_eoq` int(11) NOT NULL,
   `kd_barang` int(11) NOT NULL,
   `tahunan` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `eoq`
 --
 
 INSERT INTO `eoq` (`id_eoq`, `kd_barang`, `tahunan`) VALUES
-(1, 20, 2);
+(2, 31, 23);
 
 -- --------------------------------------------------------
 
@@ -19056,7 +19056,7 @@ ALTER TABLE `detail_pembelian`
 -- AUTO_INCREMENT for table `eoq`
 --
 ALTER TABLE `eoq`
-  MODIFY `id_eoq` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id_eoq` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `kategori`
 --

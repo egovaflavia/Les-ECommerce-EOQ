@@ -31,7 +31,7 @@
               ?>
               <tr>
                 <td><?php echo $row->nama ?></td>
-                <td><?php echo $row->tanggal ?></td>
+                <td><?php echo tgl_indo($row->tanggal) ?></td>
                 <td><?php echo $row->bank ?></td>
                 <td>Rp. <?php echo number_format($row->jumlah) ?></td>
               </tr>

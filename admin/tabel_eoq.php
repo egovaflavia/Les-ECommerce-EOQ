@@ -2,10 +2,10 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <h1> Admin </h1>
+            <h1> Eoq </h1>
             <ol class="breadcrumb">
                 <li class=""><a href="index.php"> Home</a></li>
-                <li class="active"> Admin</li>
+                <li class="active"> Eoq</li>
             </ol>
         </div>
     </div><!-- /.row -->
@@ -25,7 +25,7 @@
                             <th>Biaya Pesan</th>
                             <th>Kebutuhan Tahunan</th>
                             <th>Hasil Eoq</th>
-                            <th width="138px">Aksi</th>
+                            <th width="90px">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,13 +45,12 @@
                             <tr>
                                 <td><?php echo $no++ ?></td>
                                 <td><?php echo $row->nm_barang ?></td>
-                                <td><?php echo $row->harga ?></td>
-                                <td><?php echo $row->biaya_simpan ?></td>
-                                <td><?php echo $row->biaya_pesan ?></td>
-                                <td><?php echo $row->tahunan ?></td>
+                                <td>Rp. <?php echo number_format($row->harga) ?></td>
+                                <td>Rp. <?php echo number_format($row->biaya_simpan) ?></td>
+                                <td>Rp. <?php echo number_format($row->biaya_pesan) ?></td>
+                                <td><?php echo $row->tahunan ?> Unit</td>
                                 <td><?php echo $res ?> Unit</td>
                                 <td>
-                                    <a href="index.php?page=aksi_eoq/edit&ideoq=<?php echo $row->id_eoq ?>" class="btn btn-warning">Edit</a>
                                     <a href="index.php?page=aksi_eoq/hapus&ideoq=<?php echo $row->id_eoq ?>" class="btn btn-danger">Hapus</a>
                                 </td>
                             </tr>

@@ -5,6 +5,14 @@ $tahun = $_POST['tahun'];
 if (!isset($_SESSION['admin'])) {
     echo "<script>alert('Anda harus login');location='login.php';</script>";
 } ?>
+<?php
+$tahun = $_POST['tahun'];
+// $tahun = date("Y");
+
+if (isset($_GET['tahun']) && !empty($_GET['tahun'])) {
+    $tahun = $_GET['tahun'];
+}
+?>
 <!DOCTYPE html>
 
 <head>
@@ -42,41 +50,55 @@ if (!isset($_SESSION['admin'])) {
                         <thead>
                             <tr>
                                 <th width="10px">No</th>
-                                <th>Nama Pelanggan</th>
-                                <th>No Hp</th>
-                                <th>Tanggal</th>
-                                <th>Tujuan Pengiriman</th>
-                                <th>Total Pembelian</th>
+                                <th>Bulan</th>
+                                <th>Total</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             $no = 1;
-                            $ambil = $koneksi->query("SELECT * FROM `penjualan` LEFT JOIN pelanggan ON penjualan.id_pelanggan=pelanggan.id_pelanggan WHERE penjualan.status != 'Pending' AND penjualan.tgl_penjualan LIKE '$tahun%' ");
-                            while ($pecah = $ambil->fetch_object()) {
-                                $ttl += $pecah->total;
+                            $data_penjualan_tahuan = mysqli_query($koneksi, "select 
+                            MONTHNAME(waktu.tanggal) AS bulan,
+                            IFNULL(p.total, 0) AS total  
+                            from tb_waktu waktu 
+                            LEFT JOIN (SELECT 
+                            p.id_penjualan, 
+                            p.tgl_penjualan, 
+                            SUM(IFNULL(p.total, 0) + IFNULL(p.tarif, 0)) AS total 
+                            FROM
+                            penjualan p WHERE left(p.tgl_penjualan, 4) = '$tahun' GROUP BY LEFT(p.tgl_penjualan, 7)) p ON waktu.tanggal = p.tgl_penjualan 
+                            where left(waktu.tanggal, 4) = '$tahun' GROUP BY LEFT(waktu.tanggal, 7) ORDER BY waktu.tanggal");
+                            while ($penjualan_tahunan = mysqli_fetch_assoc($data_penjualan_tahuan)) {
+                                $total += $penjualan_tahunan['total'];
                             ?>
                                 <tr>
-                                    <td><?php echo $no++ ?></td>
-                                    <td><?php echo $pecah->username ?></td>
-                                    <td><?php echo $pecah->no_telp ?></td>
-                                    <td><?php echo tgl_indo($pecah->tgl_penjualan) ?></td>
-                                    <td><?php echo $pecah->kota ?></td>
-                                    <td>Rp. <?php echo number_format($pecah->total) ?></td>
+                                    <td><?php echo $no; ?></td>
+                                    <td><?php echo $penjualan_tahunan['bulan']; ?></td>
+                                    <td>Rp. <?php echo number_format($penjualan_tahunan['total']); ?></td>
+
                                 </tr>
-                            <?php } ?>
+                            <?php
+                                $no++;
+                            }
+                            ?>
+                        </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="5">Total</td>
-                                <td>Rp. <?php echo number_format($ttl) ?></td>
+                                <td colspan="2">Total</td>
+                                <td>Rp. <?php echo number_format($total) ?></td>
                             </tr>
                         </tfoot>
-                        </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function cetakLaporanTahunan() {
+            var tahun = document.getElementsByName("tahun")[0].value;
+            window.open("laporan/cetak_laporan_penjualan_tahunan.php?tahun=" + tahun, "_blank");
+        }
+    </script>
     <script>
         window.print();
     </script>
